@@ -28,6 +28,13 @@ const LoginModal = (props) => {
         props.onHide()
     }
 
+    const enterHandler = (event) => {
+        console.log("enter pressed")
+        if (event.key === 'Enter') {
+            joinHandler(event)
+        }
+    }
+
     return (
     <Modal
         {...props}
@@ -40,8 +47,10 @@ const LoginModal = (props) => {
                 Set Nickname and RoomID
             </Modal.Title>
         </Modal.Header>
+        <Form
+                >
             <Modal.Body>
-                <Form>
+                
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Nickname</Form.Label>
                         <Form.Control
@@ -55,14 +64,21 @@ const LoginModal = (props) => {
                         <Form.Control
                             type="text"
                             placeholder="6-digits"
-                            onChange={roomIdHandler} />
+                            onChange={roomIdHandler} 
+                            onKeyDown={enterHandler}
+                            />
                     </Form.Group>
-                </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
-                <Button variant="primary" type="submit" onClick={joinHandler}>Join</Button>
+                <Button 
+                variant="primary" 
+                type="submit" 
+                onClick={joinHandler}
+                >Join</Button>
             </Modal.Footer>
+        </Form>
+
     </Modal>
     )
 }

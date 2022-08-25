@@ -1,15 +1,12 @@
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Button from 'react-bootstrap/Button';
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import {socketContext} from '../../context/socket.js'
 import store from '../../redux/store.js'
-
+import {StyledFormControl, StyledForm, StyledButton, StyledDiv} from '../styled/MsgBox.styled.js'
 
 const MsgBox = (props) => {
     const socket = useContext(socketContext);
     const [message, setMessage] = useState("");
-    
+    const msgField = useRef(null);
     const messageHandler = (event) => {
         event.preventDefault();
         setMessage(event.target.value);
@@ -17,21 +14,30 @@ const MsgBox = (props) => {
 
     const sendHandler = (event) => {
         event.preventDefault()
-        const nickname = store.getState().nickname
+        const nickname = store.getState().rootReducer.nicknameReducer.nickname
         socket.emit("message", {nickname: nickname, message: message})
-        console.log("emit chat!!!!!!!!!!!")
+        setMessage("");
+        //clear input box
+        msgField.current.value = "";
     }
 
     return (
-        <InputGroup className="mb-3">
-            <Form.Control
-                aria-describedby="basic-addon2"
-                onChange={messageHandler}
-            />
-            <Button variant="primary" type="submit" onClick={sendHandler}>
-                Send
-            </Button>
-        </InputGroup>
+        <StyledDiv >
+            <StyledForm>
+                <StyledFormControl
+                    aria-describedby="basic-addon2"
+                    onChange={messageHandler}
+                    ref={msgField}
+                />
+                <StyledButton
+                    variant="primary"
+                    type="submit"
+                    onClick={sendHandler}>
+                    Send
+                </StyledButton>
+            </StyledForm>
+        </StyledDiv>
+        
     )
 }
 

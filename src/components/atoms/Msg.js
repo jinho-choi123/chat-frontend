@@ -3,7 +3,7 @@ import { ListGroup } from "react-bootstrap"
 const Msg = (props) => {
     return (
     <ListGroup.Item>
-        {props.message}
+        {props.nickname}: {props.message}
     </ListGroup.Item>
     )
 }

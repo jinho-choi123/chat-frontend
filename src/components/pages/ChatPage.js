@@ -7,13 +7,15 @@ const ChatPage = (props) => {
 
     return (
         <div>
-            <LoginModal 
-            show={modalShow}
-            onHide={()=>setModalShow(false)}
+            <LoginModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
             />
-            <Chat />
+            {!modalShow && <Chat />}
         </div>
+        
     )
+    
 }
 
 export default ChatPage

@@ -12,6 +12,8 @@ socket.on('disconnect', () => {
     console.log("socket disconnect")
 })
 
+
+
 const socketContext = React.createContext()
 
 export {socketContext, socket}
