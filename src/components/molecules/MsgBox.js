@@ -15,7 +15,8 @@ const MsgBox = (props) => {
     const sendHandler = (event) => {
         event.preventDefault()
         const nickname = store.getState().rootReducer.nicknameReducer.nickname
-        socket.emit("message", {nickname: nickname, message: message})
+        const roomId = store.getState().rootReducer.roomIdReducer.roomId
+        socket.emit("message", {nickname: nickname, roomId: roomId, message: message})
         setMessage("");
         //clear input box
         msgField.current.value = "";

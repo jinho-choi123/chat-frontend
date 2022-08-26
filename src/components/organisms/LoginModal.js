@@ -1,15 +1,17 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import store from '../../redux/store.js';
 import nicknameAction from '../../redux/actions/nickname.js';
 import roomIdAction from '../../redux/actions/roomId.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { socketContext } from '../../context/socket.js'
 
 const LoginModal = (props) => {
     const [nickname, setNickname] = useState("")
     const [roomId, setRoomId] = useState("")
+    const socket = useContext(socketContext);
 
     const nicknameHandler = (event) => {
         event.preventDefault();
@@ -25,6 +27,7 @@ const LoginModal = (props) => {
         event.preventDefault();
         store.dispatch(roomIdAction(roomId));
         store.dispatch(nicknameAction(nickname));
+        socket.emit('join-attempt', {nickname: nickname, roomId: roomId})
         props.onHide()
     }
 
