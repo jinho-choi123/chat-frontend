@@ -1,25 +1,13 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { isValidUser } from "../atoms/recoil/userSelector";
+import { useRecoilValue } from "recoil";
+
 
 const HomePage = () => {
+    const isValid = useRecoilValue(isValidUser);
+    const [refresh, setRefresh] = useState(false)
 
-    const [userData, setUserData] = useState({})
-
-    useEffect(() => {
-        axios.get('http://localhost:9000/auth/verify', 
-        {
-            withCredentials : true, 
-            headers: {
-                "Access-Control-Allow-Origin": 'http://localhost:9000/'
-            }})
-            .then((res) => {
-                console.log(res.data)
-                setUserData(res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
     return (
         <div>
             <meta httpEquiv='cache-control' content='no-cache'/>
@@ -28,11 +16,16 @@ const HomePage = () => {
             Home Page
             <br/>
             <br/>
+            <Link to='/login'>Login</Link>
+            <br/>
+            <br/>
+            <Link to='/logout'>Logout</Link>
+            <br/>
             <br/>
             Cookie Session Status(Is Cookie session Valid?)
             <br/>
             <br/>
-            {userData.verification? 'IT IS VALID!': 'IT IS NOT VALID!'}
+            {isValid?'VALID USER': 'NOT VALID USER'}
 
         </div>
     )
