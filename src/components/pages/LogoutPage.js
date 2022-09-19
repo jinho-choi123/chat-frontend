@@ -8,12 +8,9 @@ const LogoutPage = () => {
 
     const LogoutHandler = (event) => {
         event.preventDefault();
-        axios.get('http://localhost:9000/auth/logout', 
+        axios.get('http://localhost:3000/api/auth/logout', 
         {
             withCredentials : true, 
-            headers: {
-                "Access-Control-Allow-Origin": 'http://localhost:9000/'
-            }
         })
             .then((res) => {
                 console.log('logout success')

@@ -6,6 +6,7 @@ const isValidUser = selector({
     key: 'isValidUser', 
     get: ({get}) => {
         const originalUserState = get(userState);
+        console.log(originalUserState.verification)
         return originalUserState.verification
     }
 })

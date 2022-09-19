@@ -5,7 +5,7 @@ const LoginPage = () => {
         <div>
             Login Page
             <br/>
-            <a href='http://localhost:9000/auth/google' >Google Login</a>
+            <a href='http://localhost:3000/api/auth/google' >Google Login</a>
         </div>
     )
 }

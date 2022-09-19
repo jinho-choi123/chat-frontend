@@ -8,16 +8,18 @@ const ProtectedPage = () => {
     const [userData, setUserData] = useRecoilState(userState)
 
     useEffect(() => {
-        axios.get('http://localhost:9000/auth/verify', 
+        axios.get('http://localhost:3000/api/auth/verify', 
             {
             withCredentials : true, 
             })
             .then((res) => {
                 console.log(res)
+                console.log("got data from server")
                 setUserData(res.data)
             })
             .catch((err) => {
                 console.log(err)
+                console.log("error occured!")
             })
     }, [])
 

@@ -6,7 +6,6 @@ import { useRecoilValue } from "recoil";
 
 const HomePage = () => {
     const isValid = useRecoilValue(isValidUser);
-    const [refresh, setRefresh] = useState(false)
 
     return (
         <div>
